@@ -1,0 +1,54 @@
+﻿@using TestChart.Models
+@model  IEnumerable<Person>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>List</title>
+</head>
+<body>
+    <table border="1">
+        @{
+            int total = 0;
+            int active = 0;
+            foreach (var person in Model)
+            {
+                <tr>
+                    <td>@person.id</td>
+                    <td>@person.Name</td>
+                    @if(person.Active == true) { <td><input type="checkbox" checked/ @person.Active></td>}
+                    else{<td><input type="checkbox" @person.Active></td>}
+                </tr>
+                total++;
+                if(person.Active == true) { active++; }
+            }
+        }
+    </table>
+
+
+
+    <dialog>
+        <p>Popup header</p>
+        <p>Total count:@total</p>
+        <p>Active count:@active</p>
+        <button id="close">Close</button>
+    </dialog>
+    <button id="show">Total</button>
+
+    <script type=text/javascript>
+        var dialog = document.querySelector('dialog');
+        document.querySelector('#show').onclick = function () {
+            dialog.show();
+        };
+        document.querySelector('#close').onclick = function () {
+            dialog.close();
+        };
+    </script>
+
+</body>
+</html>
